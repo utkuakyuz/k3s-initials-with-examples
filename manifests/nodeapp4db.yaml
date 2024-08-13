@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp4
+spec:
+  selector:
+    app: nodeapp4
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp4
+spec:
+  replicas: 1 # Adjust replicas as needed
+  selector:
+    matchLabels:
+      app: nodeapp4
+  template:
+    metadata:
+      labels:
+        app: nodeapp4
+    spec:
+      containers:
+        - name: nodeapp4
+          image: nodeapp4:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:123456@postgres:5432/postgres" # Update with your actual connection string

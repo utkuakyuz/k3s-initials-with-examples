@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  default.server: |
+    ekinoks.biz {
+        hosts {
+              172.16.10.88 nginx.ekinoks.biz
+              172.16.10.99 baris.ekinoks.biz
+              fallthrough
+        }
+    }
+    tekinoks.biz {
+        hosts {
+              172.16.10.66 nginx.tekinoks.biz
+              172.16.10.67 baris.tekinoks.biz
+              fallthrough
+        }
+    }

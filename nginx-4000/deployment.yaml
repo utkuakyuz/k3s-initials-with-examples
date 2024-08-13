@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec: # specification for deployment
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+      # Following lines are blueprint for pods
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec: #-> specification for pods
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80 #port 80 of container
